@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.appline</groupId>
-    <artifactId>PageObjectFramework</artifactId>
+    <artifactId>page-object-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -124,5 +124,8 @@
 
 
         </plugins>
+
     </build>
+
+
 </project>
