@@ -1,5 +1,6 @@
 package ru.appline.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -64,10 +65,11 @@ public class RegistrationFormPage extends BasePage {
     private WebElement errorMessageAlert;
 
     /**
-     * роверка открытия страницы, путём проверки title страницы
+     * Проверка открытия страницы, путём проверки title страницы
      *
      * @return RegistrationFormPage - т.е. остаемся на этой странице
      */
+    @Step("Проверяем что открылась страница 'Заполнение формы'")
     public RegistrationFormPage checkOpenRegistrationFormPage() {
         waitUtilElementToBeVisible(title);
         wait.until(ExpectedConditions.attributeContains(title, "class", "col-4 step-element active"));
@@ -81,6 +83,7 @@ public class RegistrationFormPage extends BasePage {
      * @param value     - значение вводимое в поле
      * @return RegistrationFormPage - т.е. остаемся на этой странице
      */
+    @Step("Заполняем поле '{nameField}' значением '{value}'")
     public RegistrationFormPage fillField(String nameField, String value) {
         WebElement element = null;
         switch (nameField) {
@@ -145,6 +148,7 @@ public class RegistrationFormPage extends BasePage {
      * @param errMassage - ошибка проверяемая которая отображается возле этого поля
      * @return RegistrationFormPage - т.е. остаемся на этой странице
      */
+    @Step("Проверяем что под поле '{nameField}' отображается ошибка '{errMassage}'")
     public RegistrationFormPage checkErrorMessageAtField(String nameField, String errMassage) {
         WebElement element = null;
         switch (nameField) {
@@ -173,6 +177,7 @@ public class RegistrationFormPage extends BasePage {
      *
      * @return RegistrationFormPage - т.е. остаемся на этой странице
      */
+    @Step("Кликаем по кнопке 'Продолжить'")
     public RegistrationFormPage clickBtnContinue() {
         waitUtilElementToBeClickable(btnContinue).click();
         return this;
@@ -183,6 +188,7 @@ public class RegistrationFormPage extends BasePage {
      *
      * @return RegistrationFormPage - т.е. остаемся на этой странице
      */
+    @Step("Проверяем что присутствует общая ошибка с текстом '{errMessage}'")
     public RegistrationFormPage checkErrorMessageAlert(String errMessage) {
         Assert.assertEquals("Проверка ошибки у alert на странице " +
                         "'Оформления страхования путешественников' было не пройдено",
