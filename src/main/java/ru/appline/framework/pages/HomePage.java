@@ -2,6 +2,7 @@ package ru.appline.framework.pages;
 
 import io.qameta.allure.Step;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,6 +13,9 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[@class='kitt-cookie-warning__close']")
     private WebElement cookiesBtnClose;
 
+    @FindBy(xpath = ".//nav[@aria-label='Основное меню']")
+    WebElement mainMenu;
+
     @FindBy(xpath = "//li[contains(@class,'kitt-top-menu__item_first')]/a[@role or @aria-expanded]")
     private List<WebElement> listBaseMenu;
 
@@ -21,9 +25,14 @@ public class HomePage extends BasePage {
 
     @Step("Закрытия сообщения cookies")
     public HomePage closeCookiesDialog() {
-        try {
-            waitUtilElementToBeClickable(cookiesBtnClose).click();
-        }catch (Exception ignore){}
+        waitStabilityPage(5000,250);
+        waitUtilElementToBeClickable(cookiesBtnClose).click();
+        return this;
+    }
+
+    @Step("Проврка прогрузилась ли главная страничка")
+    public HomePage checkMainMenu() {
+        Assert.assertTrue("Гланая старничка не открылась", waitUtilElementToBeVisible(mainMenu).isDisplayed());
         return this;
     }
 
@@ -32,6 +41,9 @@ public class HomePage extends BasePage {
         for (WebElement menuItem : listBaseMenu) {
             if (menuItem.getText().trim().equalsIgnoreCase(nameBaseMenu)) {
                 waitUtilElementToBeClickable(menuItem).click();
+                Assert.assertTrue("Меню иконки не открылось", waitUtilElementToBeVisible(menuItem
+                                        .findElement(By.xpath("./..//a[contains(@aria-label,'Закрыть меню')]")))
+                                        .isDisplayed());
                 return this;
             }
         }

@@ -9,10 +9,11 @@ public class FirstTest extends BaseTests {
     public void startTest() {
         app.getHomePage()
                 .closeCookiesDialog()
+                .checkMainMenu()
                 .selectBaseMenu("Ипотека")
                 .selectSubMenu("Ипотека на вторичное жильё")
                 .checkOpenMortgagePage()
-                .goOtherFrame()
+                .goToFrame()
                 .fillField("Стоимость недвижимости", "5180000".toCharArray())
                 .fillField("Первоначальный взнос", "3058000".toCharArray())
                 .fillField("Срок кредита", "30".toCharArray())

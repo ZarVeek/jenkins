@@ -146,25 +146,6 @@ public class DriverManager {
                 capability.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
                 driver = new ChromeDriver(capability);
                 break;
-            case "remote":
-                DesiredCapabilities capabilities = new DesiredCapabilities();
-                capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-                capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
-                capabilities.setCapability("browserName", "chrome");
-                capabilities.setCapability("browserVersion", "109.0");
-                capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                        "enableVNC", true,
-                        "enableVideo", true
-                ));
-                try {
-                    driver = new RemoteWebDriver(
-                            URI.create("http://149.154.71.152:4444/wd/hub").toURL(),
-                            capabilities
-                    );
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
             default:
                 Assert.fail("Типа браузера '" + props.getProperty(TYPE_BROWSER) + "' не существует во фреймворке");
         }

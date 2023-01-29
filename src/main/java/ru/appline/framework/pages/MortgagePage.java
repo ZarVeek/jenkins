@@ -90,7 +90,7 @@ public class MortgagePage extends BasePage {
         return this;
     }
     @Step("Переходим на другой фрейм")
-    public MortgagePage goOtherFrame(){
+    public MortgagePage goToFrame(){
         driverManager.getDriver().switchTo().frame(waitElement("//*[@sandbox=\"allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation\"]", driverManager.getDriver()));
         return this;
     }
