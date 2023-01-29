@@ -3,10 +3,6 @@ package ru.appline.framework.managers;
 import ru.appline.framework.pages.MortgagePage;
 import ru.appline.framework.pages.HomePage;
 
-/**
- * @author Arkadiy_Alaverdyan
- * Класс для управления страничками
- */
 public class PageManager {
 
     /**
@@ -44,11 +40,6 @@ public class PageManager {
         return pageManager;
     }
 
-    /**
-     * Ленивая инициализация {@link HomePage}
-     *
-     * @return StartPage
-     */
     public HomePage getHomePage() {
         if (homePage == null) {
             homePage = new HomePage();
@@ -56,11 +47,6 @@ public class PageManager {
         return homePage;
     }
 
-    /**
-     * Ленивая инициализация {@link MortgagePage}
-     *
-     * @return RegistrationFormPage
-     */
     public MortgagePage getMortgagePage() {
         if (mortgagePage == null) {
             mortgagePage = new MortgagePage();
