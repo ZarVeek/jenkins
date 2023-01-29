@@ -4,12 +4,15 @@ import org.apache.commons.exec.OS;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 import static ru.appline.framework.utils.PropConst.*;
 
 /**
- * @author Arkadiy_Alaverdyan
+ * @author Artem Kireev
  * Класс для управления веб драйвером
  */
 public class DriverManager {
@@ -132,7 +135,10 @@ public class DriverManager {
                 break;
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", props.getProperty(chrome));
-                driver = new ChromeDriver();
+                ChromeOptions capability = new ChromeOptions();
+                capability.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+                capability.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
+                driver = new ChromeDriver(capability);
                 break;
             default:
                 Assert.fail("Типа браузера '" + props.getProperty(TYPE_BROWSER) + "' не существует во фреймворке");

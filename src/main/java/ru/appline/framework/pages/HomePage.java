@@ -7,10 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * @author Arkadiy_Alaverdyan
- * Стартовая страница приложения
- */
 public class HomePage extends BasePage {
 
     @FindBy(xpath = "//button[@class='kitt-cookie-warning__close']")
@@ -23,23 +19,12 @@ public class HomePage extends BasePage {
     private List<WebElement> listSubMenu;
 
 
-    /**
-     * Закрытия сообщения cookies
-     *
-     * @return HomePage - т.е. остаемся на этой странице
-     */
     @Step("Закрытия сообщения cookies")
     public HomePage closeCookiesDialog() {
         waitUtilElementToBeClickable(cookiesBtnClose).click();
         return this;
     }
 
-    /**
-     * Функция наведения мыши на любой пункт меню
-     *
-     * @param nameBaseMenu - наименование меню
-     * @return HomePage - т.е. остаемся на этой странице
-     */
     @Step("Выбираем '{nameBaseMenu}' в главном меню")
     public HomePage selectBaseMenu(String nameBaseMenu) {
         for (WebElement menuItem : listBaseMenu) {
@@ -52,22 +37,16 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    /**
-     * Функция клика на любое подменю
-     *
-     * @param nameSubMenu - наименование подменю
-     * @return InsurancePage - т.е. переходим на страницу {@link InsurancePage}
-     */
     @Step("Выбираем '{nameSubMenu}' в подменю главного меню")
-    public InsurancePage selectSubMenu(String nameSubMenu) {
+    public MortgagePage selectSubMenu(String nameSubMenu) {
         for (WebElement menuItem : listSubMenu) {
             if (menuItem.getText().equalsIgnoreCase(nameSubMenu)) {
                 waitUtilElementToBeClickable(menuItem).click();
-                return pageManager.getInsurancePage().checkOpenInsurancePage();
+                return pageManager.getMortgagePage().checkOpenMortgagePage();
             }
         }
         Assert.fail("Подменю '" + nameSubMenu + "' не было найдено на стартовой странице!");
-        return pageManager.getInsurancePage();
+        return pageManager.getMortgagePage();
     }
 
 

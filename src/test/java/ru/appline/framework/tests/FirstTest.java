@@ -9,30 +9,23 @@ public class FirstTest extends BaseTests {
     public void startTest() {
         app.getHomePage()
                 .closeCookiesDialog()
-                .selectBaseMenu("Страхование")
-                .selectSubMenu("Путешествия")
-                .checkOpenInsurancePage()
-                .checkoutOnline()
-                .checkOpenSelectInsuranceServicePage()
-                .selectTariffMin()
-                .checkoutInsuranceOnline()
-                .checkOpenRegistrationFormPage()
-                .fillField("Застрахованные - Фамилия", "Privet")
-                .fillField("Застрахованные - Имя", "Адам")
-                .fillField("Застрахованные - Дата рождения", "12.06.1990")
-                .fillField("Страхователь - Фамилия", "Петров")
-                .fillField("Страхователь - Имя", "Вася")
-                .fillField("Страхователь - Отчество", "Петрович")
-                .fillField("Страхователь - Дата рождения", "16.07.1980")
-                .fillField("Страхователь - Серия паспорта", "4510")
-                .fillField("Страхователь - Номер паспорта", "745602")
-                .fillField("Страхователь - Дата выдачи", "16.09.2019")
-                .fillField("Страхователь - Кем выдан", "Кем-то")
-                .clickBtnContinue()
-                .checkErrorMessageAtField("Контакты - Мобильный телефон", "Поле не заполнено.")
-                .checkErrorMessageAtField("Контакты - Электронная почта", "Поле не заполнено.")
-                .checkErrorMessageAtField("Контакты - Повтор электронной почты", "Поле не заполнено.")
-                .checkErrorMessageAlert("При заполнении данных произошла ошибка");
+                .selectBaseMenu("Ипотека")
+                .selectSubMenu("Ипотека на вторичное жильё")
+                .checkOpenMortgagePage()
+                .goOtherFrame()
+                .fillField("Стоимость недвижимости", "5180000".toCharArray())
+                .fillField("Первоначальный взнос", "3058000".toCharArray())
+                .fillField("Срок кредита", "30".toCharArray())
+                .clickInsurance()
+                .checkFields("Сумма кредита", "2122000")
+                .checkFields("Ежемесячный платеж", "21664")
+                .checkFields("Необходимый доход", "36829")
+                .checkFields("Процентная ставка", "11");
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

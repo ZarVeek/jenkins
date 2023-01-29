@@ -1,9 +1,7 @@
 package ru.appline.framework.managers;
 
-import ru.appline.framework.pages.RegistrationFormPage;
+import ru.appline.framework.pages.MortgagePage;
 import ru.appline.framework.pages.HomePage;
-import ru.appline.framework.pages.InsurancePage;
-import ru.appline.framework.pages.SelectInsuranceServicePage;
 
 /**
  * @author Arkadiy_Alaverdyan
@@ -22,19 +20,9 @@ public class PageManager {
     private HomePage homePage;
 
     /**
-     * Страничка страхование путешественников
+     * Страничка ипотеки
      */
-    private InsurancePage insurancePage;
-
-    /**
-     * Страничка выбора полиса или тарифа
-     */
-    private SelectInsuranceServicePage selectInsuranceServicePage;
-
-    /**
-     * Страничка оформления полиса страхования
-     */
-    private RegistrationFormPage registrationFormPage;
+    private MortgagePage mortgagePage;
 
     /**
      * Конструктор специально был объявлен как private (singleton паттерн)
@@ -69,38 +57,14 @@ public class PageManager {
     }
 
     /**
-     * Ленивая инициализация {@link InsurancePage}
-     *
-     * @return InsurancePage
-     */
-    public InsurancePage getInsurancePage() {
-        if (insurancePage == null) {
-            insurancePage = new InsurancePage();
-        }
-        return insurancePage;
-    }
-
-    /**
-     * Ленивая инициализация {@link SelectInsuranceServicePage}
-     *
-     * @return TariffPage
-     */
-    public SelectInsuranceServicePage getSelectInsuranceServicePage() {
-        if (selectInsuranceServicePage == null) {
-            selectInsuranceServicePage = new SelectInsuranceServicePage();
-        }
-        return selectInsuranceServicePage;
-    }
-
-    /**
-     * Ленивая инициализация {@link ru.appline.framework.pages.RegistrationFormPage}
+     * Ленивая инициализация {@link MortgagePage}
      *
      * @return RegistrationFormPage
      */
-    public RegistrationFormPage getRegistrationFormPage() {
-        if (registrationFormPage == null) {
-            registrationFormPage = new RegistrationFormPage();
+    public MortgagePage getMortgagePage() {
+        if (mortgagePage == null) {
+            mortgagePage = new MortgagePage();
         }
-        return registrationFormPage;
+        return mortgagePage;
     }
 }

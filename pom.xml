@@ -75,21 +75,22 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <includes>**/*CucumberRunner.java</includes>
+                    <includes>**/*Test.java</includes>
                     <argLine>
                         -Xmx1024m
                         -Dfile.encoding=${encoding.type}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                            <value>ru.appline.framework.utils.MyAllureListener</value>
                         </property>
                     </properties>
+
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
@@ -116,7 +117,7 @@
                         <id>allure-plugin</id>
                         <phase>install</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>serve</goal>
                         </goals>
                     </execution>
                 </executions>
