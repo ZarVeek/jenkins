@@ -16,7 +16,7 @@
         <file.encoding>${encoding.type}</file.encoding>
 
         <!-- Java version -->
-        <java.version>8</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
@@ -62,8 +62,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>9</source>
+                    <target>9</target>
                     <encoding>${encoding.type}</encoding>
                 </configuration>
             </plugin>

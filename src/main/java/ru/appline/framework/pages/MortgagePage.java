@@ -31,20 +31,11 @@ public class MortgagePage extends BasePage {
     @FindBy(xpath = "//label[contains(text(), \"Срок кредита\")]//../input")
     private WebElement creditTerm;
 
-    @FindBy(xpath = "//span[text()=\"Страхование жизни и здоровья\"]/../span[@class]/label/div/input")
-    private WebElement insurance;
+    @FindBy(xpath = ".//div[contains(@class,'gRWVZjEp676wfaZSnbjVR')]")
+    List<WebElement> listOfCheckbox;
 
-    @FindBy(xpath = "//span[text()=\"Сумма кредита\"]/../div/span/span")
-    private WebElement amountCredit;
-
-    @FindBy(xpath = "//span[text()=\"Ежемесячный платеж\"]/../div/span/span")
-    private WebElement monthlyPayment;
-
-    @FindBy(xpath = "//span[text()=\"Необходимый доход\"]/../div/span/span")
-    private WebElement requiredIncome;
-
-    @FindBy(xpath = "//div[@class=\"_3gNM-Vy-F04mXdV3m7eDa5\"]/span[@class=\"_19zitcoxuphOm2IGRCrUgj _3tYtxkewCDzsmb7j3HW491 _1rMtvwq1_0KwWEWAsjJ98j\"]/span")
-    private WebElement interestRate;
+    @FindBy(xpath = ".//div[@data-test-id='main-results-block']/../..//span")
+    List<WebElement> listOfResultMenu;
 
     @Step("Проверяем что открылась страница 'Заполнение формы'")
     public MortgagePage checkOpenMortgagePage() {
@@ -83,24 +74,19 @@ public class MortgagePage extends BasePage {
     }
 
     @Step("Проверяем поле '{nameField}' со значением '{value}'")
-    public MortgagePage checkFields(String nameField, String value) {
-        switch (nameField) {
-            case ("Сумма кредита"):
-                Assert.assertEquals("Сумма кредита не совпадает", value, amountCredit.getAttribute("innerHTML").replaceAll("[^0-9]", ""));
-                break;
-            case ("Ежемесячный платеж"):
-                Assert.assertEquals("Ежемесячный платеж не совпадает", value, monthlyPayment.getAttribute("innerHTML").replaceAll("[^0-9]", ""));
-                break;
-            case ("Необходимый доход"):
-                Assert.assertEquals("Необходимый доход не совпадает", value, requiredIncome.getAttribute("innerHTML").replaceAll("[^0-9]", ""));
-                break;
-            case ("Процентная ставка"):
-                Assert.assertEquals("Процентная ставка не совпадает", value, interestRate.getAttribute("innerHTML").replaceAll("[^0-9,]", ""));
-                break;
-            default:
-                Assert.fail("Поле с наименованием '" + nameField + "' отсутствует на странице " +
-                        "'Оформления ипотеки'");
+    public MortgagePage checkParameters(String nameOfParameter, String meaning) {
+        for (WebElement parameter : listOfResultMenu) {
+            if (parameter.getText().contains(nameOfParameter)) {
+                waitStabilityPage(5000, 250);
+                String parameterInString = parameter
+                        .findElement(By.xpath("./..//span/span"))
+                        .getText()
+                        .replaceAll("[^0-9,]", "");
+                Assert.assertEquals("Параметр " + nameOfParameter + " " + parameterInString +" не верный", meaning, parameterInString);
+                return this;
+            }
         }
+        Assert.fail("Параметр не найден");
         return this;
     }
     @Step("Переходим на другой фрейм")
@@ -112,10 +98,15 @@ public class MortgagePage extends BasePage {
     private WebElement waitElement(String elem, WebDriver driver) {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elem)));
     }
-    @Step("Убираем галочку со страхования")
-    public MortgagePage clickInsurance(){
-        scrollToElementAndClickJs(insurance);
-
+    @Step("Клик по чекбоксу {nameOfCheckbox}")
+    public MortgagePage clickCheckbox(String nameOfCheckbox) {
+        for (WebElement form : listOfCheckbox) {
+            if (form.findElement(By.xpath("./div/span")).getText().contains(nameOfCheckbox)) {
+                clickToElementJs(form.findElement(By.xpath(".//input")));
+                return this;
+            }
+        }
+        Assert.fail("Checkbox не найден");
         return this;
     }
     @Step("Закрытия сообщения cookies")

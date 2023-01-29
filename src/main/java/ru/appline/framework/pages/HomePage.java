@@ -21,7 +21,9 @@ public class HomePage extends BasePage {
 
     @Step("Закрытия сообщения cookies")
     public HomePage closeCookiesDialog() {
-        waitUtilElementToBeClickable(cookiesBtnClose).click();
+        try {
+            waitUtilElementToBeClickable(cookiesBtnClose).click();
+        }catch (Exception ignore){}
         return this;
     }
 

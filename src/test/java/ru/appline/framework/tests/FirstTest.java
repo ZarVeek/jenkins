@@ -16,11 +16,11 @@ public class FirstTest extends BaseTests {
                 .fillField("Стоимость недвижимости", "5180000".toCharArray())
                 .fillField("Первоначальный взнос", "3058000".toCharArray())
                 .fillField("Срок кредита", "30".toCharArray())
-                .clickInsurance()
-                .checkFields("Сумма кредита", "2122000")
-                .checkFields("Ежемесячный платеж", "21664")
-                .checkFields("Необходимый доход", "36829")
-                .checkFields("Процентная ставка", "11");
+                .clickCheckbox("Страхование жизни и здоровья")
+                .checkParameters("Ежемесячный платеж", "21664")
+                .checkParameters("Сумма кредита","2122000")
+                .checkParameters("Необходимый доход","36829")
+                .checkParameters("Процентная ставка","11");
         try {
             Thread.sleep(7000);
         } catch (InterruptedException e) {

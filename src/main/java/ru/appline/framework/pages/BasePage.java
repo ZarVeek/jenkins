@@ -29,8 +29,7 @@ public class BasePage {
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         return element;
     }
-    protected WebElement scrollToElementAndClickJs(WebElement element) {
-        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    protected WebElement clickToElementJs(WebElement element) {
         js.executeScript("arguments[0].click();", element);
         return element;
     }
